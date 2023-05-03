@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MRA.Jobs.Application.Contracts.VacancyCategories.Commands;
 using MRA.Jobs.Application.Contracts.VacancyCategories.Queries;
 
 namespace MRA.Jobs.Web.Controllers;
@@ -18,7 +19,7 @@ public class CategoryController : ApiControllerBase
     [HttpGet]
     public async Task<IActionResult> Get()
     {
-        var categories =await Mediator.Send(new GetVacancyCategoriesQuery());
+        var categories = await Mediator.Send(new GetVacancyCategoriesQuery());
         return Ok(categories);
     }
     [HttpGet("{id}")]
@@ -26,5 +27,10 @@ public class CategoryController : ApiControllerBase
     {
         var category = Mediator.Send(new GetByIdVacancyCategoryQuery { Id = id });
         return Ok(category);
+    }
+    [HttpPost]
+    public async Task<IActionResult> Add(CreateVacancyCategoryCommand request, CancellationToken cancellationToken)
+    {
+        return Ok(await Mediator.Send(request, cancellationToken));
     }
 }
