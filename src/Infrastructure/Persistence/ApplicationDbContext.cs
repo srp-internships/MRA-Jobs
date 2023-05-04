@@ -41,7 +41,6 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
     public DbSet<Applicant> Applicants { get; set; }
     public DbSet<SocialMedia> SocialMedias { get; set; }
 
-    public DbSet<Applicant> Applicants { get; set; }
 
     #region override
     protected override void OnModelCreating(ModelBuilder builder)

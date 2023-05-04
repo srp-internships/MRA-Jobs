@@ -9,7 +9,6 @@ public interface IApplicationDbContext
     DbSet<VacancyCategory> Categories { get; }
     DbSet<Applicant> Applicants { get; }
     DbSet<User> Users { get; }
-     DbSet<Applicant> Applicants { get; set; }
      DbSet<SocialMedia> SocialMedias { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }
