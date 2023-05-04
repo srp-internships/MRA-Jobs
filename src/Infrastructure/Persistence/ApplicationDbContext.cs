@@ -37,7 +37,9 @@ public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, 
 
     public DbSet<JobVacancy> JobVacancies { get; set; }
     public DbSet<VacancyCategory> Categories { get; set; }
-    public DbSet<User> Users { get; }
+    public DbSet<User> Users { get; set; }
+    public DbSet<Applicant> Applicants { get; set; }
+    public DbSet<SocialMedia> SocialMedias { get; set; }
 
 
     #region override

@@ -10,4 +10,6 @@ public class SocialMedia:BaseEntity
 {
     public string Portfolio { get; set; }
     public SocialMediaType SocialMediaType { get; set; }
+    public long UserId { get; set; }
+    public Applicant Applicant { get; set; }
 }

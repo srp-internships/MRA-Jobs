@@ -13,6 +13,10 @@ public class ApplicantConfiguration : IEntityTypeConfiguration<Applicant>
     public void Configure(EntityTypeBuilder<Applicant> builder)
     {
         builder.HasKey(a => a.Id);
-        builder.Property(s => s.Id).ValueGeneratedOnAdd();
+        builder.Property(s => s.Id)
+            .ValueGeneratedOnAdd();
+        builder.HasMany(s => s.SocialMedia)
+            .WithOne(s=>s.Applicant)
+            .HasForeignKey(s=>s.UserId);
     }
 }
