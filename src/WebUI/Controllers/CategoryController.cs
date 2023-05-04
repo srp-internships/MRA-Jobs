@@ -33,4 +33,15 @@ public class CategoryController : ApiControllerBase
     {
         return Ok(await Mediator.Send(request, cancellationToken));
     }
+    [HttpPut]
+    public async Task<IActionResult>Update(UpdateVacancyCategoryCommand request, CancellationToken cancellationToken)
+    {
+        return Ok(await Mediator.Send(request, cancellationToken));
+    }
+    [HttpDelete]
+    public async Task<IActionResult> Delete(int id, CancellationToken cancellationToken)
+    {
+        await Mediator.Send(new DeleteVacancyCategoryCommand { Id = id }, cancellationToken);
+        return Ok();
+    }
 }
