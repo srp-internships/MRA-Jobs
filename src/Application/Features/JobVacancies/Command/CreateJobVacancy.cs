@@ -35,7 +35,6 @@ public class CreateJobVacancyCommandHadler : IRequestHandler<CreateJobVacancyCom
             RequiredYearOfExperience = request.RequiredYearOfExperience,
             WorkSchedule = (WorkSchedule)request.WorkSchedule
         };
-
         _context.JobVacancies.Add(entity);
         await _context.SaveChangesAsync(cancellationToken);
         return entity.Id;

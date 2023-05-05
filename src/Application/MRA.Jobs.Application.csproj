@@ -21,7 +21,6 @@
 
     <ItemGroup>
       <Folder Include="Features\JobVacancies\Query\" />
-      <Folder Include="Features\SocialMedias\Queries\" />
     </ItemGroup>
 
 </Project>

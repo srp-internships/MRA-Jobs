@@ -19,6 +19,7 @@ public class DeleteTodoItemTests : BaseTestFixture
 
         await FluentActions.Invoking(() =>
             SendAsync(command)).Should().ThrowAsync<NotFoundException>();
+        
     }
 
     [Test]
