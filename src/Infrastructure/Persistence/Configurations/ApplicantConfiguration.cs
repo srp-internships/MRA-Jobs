@@ -15,8 +15,9 @@ public class ApplicantConfiguration : IEntityTypeConfiguration<Applicant>
         builder.HasKey(a => a.Id);
         builder.Property(s => s.Id)
             .ValueGeneratedOnAdd();
-        builder.HasMany(s => s.SocialMedia)
+        builder.HasMany(s => s.SocialMedias)
             .WithOne(s=>s.Applicant)
             .HasForeignKey(s=>s.UserId);
+        
     }
 }
