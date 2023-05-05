@@ -19,5 +19,7 @@ public class ApplicantConfiguration : IEntityTypeConfiguration<Applicant>
             .WithOne(s=>s.Applicant)
             .HasForeignKey(s=>s.UserId);
         
+        builder.Property(s => s.Id).ValueGeneratedOnAdd();
+      
     }
 }
