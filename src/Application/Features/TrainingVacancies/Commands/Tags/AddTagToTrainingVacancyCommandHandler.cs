@@ -21,7 +21,7 @@ public class AddTagToTrainingVacancyCommandHandler : IRequestHandler<AddTagToTra
         var trainingVacancy = await _context.TrainingVacancies.FindAsync(new object[] { request.VacancyId }, cancellationToken);
 
         if (trainingVacancy == null)
-            throw new NotFoundException(nameof(JobVacancy), request.VacancyId);
+            throw new EntityNotFoundException(nameof(JobVacancy), request.VacancyId);
 
         foreach (var tagName in request.Tags)
         {

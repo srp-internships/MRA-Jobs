@@ -33,7 +33,7 @@ public class RemoveTagsFromReviewerCommandHandler : IRequestHandler<RemoveTagsFr
          .FirstOrDefaultAsync(x => x.Id == request.ReviewerId, cancellationToken);
 
         if (reviewer == null)
-            throw new NotFoundException(nameof(reviewer), request.ReviewerId);
+            throw new EntityNotFoundException(nameof(reviewer), request.ReviewerId);
 
         foreach (var tag in request.Tags)
         {

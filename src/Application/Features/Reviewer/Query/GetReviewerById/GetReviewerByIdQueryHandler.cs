@@ -19,7 +19,7 @@ public class GetReviewerByIdQueryHandler : IRequestHandler<GetReviewerByIdQuery,
     {
         var reviewer =
             await _context.Reviewers.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
-        _ = reviewer ?? throw new NotFoundException(nameof(Reviewer), request.Id);
+        _ = reviewer ?? throw new EntityNotFoundException(nameof(Reviewer), request.Id);
         
         return _mapper.Map<ReviewerDetailsDto>(reviewer);
 

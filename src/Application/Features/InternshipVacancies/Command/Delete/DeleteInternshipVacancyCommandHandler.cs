@@ -15,7 +15,7 @@ public class DeleteInternshipVacancyCommandHandler : IRequestHandler<DeleteInter
         var internship = await _context.Internships.FindAsync(new object[] { request.Id }, cancellationToken);
 
         if (internship == null)
-            throw new NotFoundException(nameof(InternshipVacancy), request.Id);
+            throw new EntityNotFoundException(nameof(InternshipVacancy), request.Id);
 
         _context.Internships.Remove(internship);
         await _context.SaveChangesAsync(cancellationToken);

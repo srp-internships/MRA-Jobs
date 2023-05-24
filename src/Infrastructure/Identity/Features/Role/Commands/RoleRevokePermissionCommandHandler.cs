@@ -26,7 +26,7 @@ public class RoleRevokePermissionCommandHandler : IRequestHandler<RoleRevokePerm
         var role = await _context.Roles.FindAsync(request.Id);
         if (role == null)
         {
-            throw new NotFoundException(nameof(ApplicationRole), request.Id);
+            throw new EntityNotFoundException(nameof(ApplicationRole), request.Id);
         }
 
         var permissions = await _context.RolePermissions.Where(r => r.RoleId == request.Id).ToListAsync();

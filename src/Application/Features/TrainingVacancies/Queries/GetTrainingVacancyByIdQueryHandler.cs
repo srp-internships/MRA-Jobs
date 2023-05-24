@@ -15,7 +15,7 @@ public class GetTrainingVacancyByIdQueryHandler : IRequestHandler<GetTrainingVac
     public async Task<TrainingVacancyDetailedResponce> Handle(GetTrainingVacancyByIdQuery request, CancellationToken cancellationToken)
     {
         var trainingVacancy = await _context.TrainingVacancies.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
-        _ = trainingVacancy ?? throw new NotFoundException(nameof(TrainingVacancy), request.Id);
+        _ = trainingVacancy ?? throw new EntityNotFoundException(nameof(TrainingVacancy), request.Id);
         return _mapper.Map<TrainingVacancyDetailedResponce>(trainingVacancy);
     }
 }

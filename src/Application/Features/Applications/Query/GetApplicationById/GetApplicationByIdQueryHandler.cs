@@ -17,7 +17,7 @@ public class GetApplicationByIdQueryHandler : IRequestHandler<GetByIdApplication
     public async Task<ApplicationDetailsDTO> Handle(GetByIdApplicationQuery request, CancellationToken cancellationToken)
     {
         var application = await _dbContext.Applications.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
-        _ = application ?? throw new NotFoundException(nameof(Application), request.Id);
+        _ = application ?? throw new EntityNotFoundException(nameof(Application), request.Id);
 
         return _mapper.Map<ApplicationDetailsDTO>(application);
     }

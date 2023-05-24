@@ -24,12 +24,12 @@ public class UpdateApplicationCommandHadler : IRequestHandler<UpdateApplicationC
     public async Task<Guid> Handle(UpdateApplicationCommand request, CancellationToken cancellationToken)
     {
         var application = await _context.Applications.FindAsync(request.Id);
-        _ = application ?? throw new NotFoundException(nameof(Application), request.Id);
+        _ = application ?? throw new EntityNotFoundException(nameof(Application), request.Id);
 
         var applicant = await _context.Applicants.FindAsync(request.ApplicantId)
-             ?? throw new NotFoundException(nameof(Applicant), request.ApplicantId);
+             ?? throw new EntityNotFoundException(nameof(Applicant), request.ApplicantId);
         var vacancy = await _context.Vacancies.FindAsync(request.VacancyId)
-            ?? throw new NotFoundException(nameof(Vacancy), request.VacancyId);
+            ?? throw new EntityNotFoundException(nameof(Vacancy), request.VacancyId);
 
         _mapper.Map(request, application);
 

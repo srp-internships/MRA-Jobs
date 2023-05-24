@@ -29,7 +29,7 @@ public class UpdateApplicantCommandHandlerTests : BaseTestFixture
 
         // Assert 
         act.Should()
-            .ThrowAsync<NotFoundException>()
+            .ThrowAsync<EntityNotFoundException>()
             .WithMessage($"*{nameof(Applicant)}*{command.Id}*");
     }
 

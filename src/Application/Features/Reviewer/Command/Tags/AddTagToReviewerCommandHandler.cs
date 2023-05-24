@@ -30,7 +30,7 @@ public class AddTagToReviewerCommandHandler : IRequestHandler<AddTagsToReviewerC
           .FirstOrDefaultAsync(x => x.Id == request.ReviewerId, cancellationToken);
 
         if (reviewer == null)
-            throw new NotFoundException(nameof(JobVacancy), request.ReviewerId);
+            throw new EntityNotFoundException(nameof(JobVacancy), request.ReviewerId);
 
         foreach (var tagName in request.Tags)
         {

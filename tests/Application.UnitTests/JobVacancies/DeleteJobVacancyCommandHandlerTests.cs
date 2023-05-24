@@ -42,7 +42,7 @@ public class DeleteJobVacancyCommandHandlerTests : BaseTestFixture
             .ReturnsAsync(null as JobVacancy);
 
         // Act + Assert
-        Assert.ThrowsAsync<NotFoundException>(() => _handler.Handle(command, default));
+        Assert.ThrowsAsync<EntityNotFoundException>(() => _handler.Handle(command, default));
         _dbContextMock.Verify(x => x.JobVacancies.Remove(It.IsAny<JobVacancy>()), Times.Never);
         _dbContextMock.Verify(x => x.SaveChangesAsync(default), Times.Never);
     }

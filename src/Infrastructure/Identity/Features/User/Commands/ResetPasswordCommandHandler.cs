@@ -17,7 +17,7 @@ public class ResetPasswordCommandHandler : IRequestHandler<ResetUserPasswordComm
     {
         var user = await _userManager.FindByIdAsync(request.UserId.ToString());
         if (user == null)
-            throw new NotFoundException(nameof(ApplicationUser), request.UserId);
+            throw new EntityNotFoundException(nameof(ApplicationUser), request.UserId);
 
         var token = await _userManager.GeneratePasswordResetTokenAsync(user);
         var result = await _userManager.ResetPasswordAsync(user, token, PaswordHelper.RandomPassword());

@@ -21,7 +21,7 @@ public class ConfirmEmailChangeCommandHandler : IRequestHandler<ConfirmEmailChan
     {
         var user = await _userManager.FindByIdAsync(request.UserId.ToString());
         if (user == null)
-            throw new NotFoundException(nameof(ApplicationUser), request.UserId);
+            throw new EntityNotFoundException(nameof(ApplicationUser), request.UserId);
 
         if (_userManager.Users.Any(u => u.NormalizedEmail == request.NewEmail && u.Id != u.Id))
             throw new ValidationException(new[] { new ValidationFailure() { PropertyName = nameof(request.NewEmail), ErrorMessage = $"Account with {request.NewEmail} email already exist!" } });

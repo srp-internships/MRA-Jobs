@@ -45,7 +45,7 @@ public class UpdateMyProfileCommandHandler : IRequestHandler<UpdateMyProfileComm
 
         var domainUser = await _context.DomainUsers.FindAsync(userId, cancellationToken);
         if (domainUser is null)
-            throw new NotFoundException(nameof(User), userId);
+            throw new EntityNotFoundException(nameof(User), userId);
 
         domainUser.DateOfBirth = command.DateOfBirth;
         domainUser.FirstName = command.FirstName;

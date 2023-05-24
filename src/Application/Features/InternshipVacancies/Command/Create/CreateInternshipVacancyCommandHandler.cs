@@ -20,7 +20,7 @@ public class CreateInternshipVacancyCommandHandler : IRequestHandler<CreateInter
     public async Task<Guid> Handle(CreateInternshipVacancyCommand request, CancellationToken cancellationToken)
     {
         var category = await _context.Categories.FindAsync(request.CategoryId);
-        _ = category ?? throw new NotFoundException(nameof(VacancyCategory), request.CategoryId);
+        _ = category ?? throw new EntityNotFoundException(nameof(VacancyCategory), request.CategoryId);
 
         var internship = _mapper.Map<InternshipVacancy>(request);
         await _context.Internships.AddAsync(internship, cancellationToken);

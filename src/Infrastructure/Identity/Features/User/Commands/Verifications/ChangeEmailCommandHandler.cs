@@ -17,7 +17,7 @@ public class ChangeEmailCommandHandler : IRequestHandler<ChangeEmailCommand, Uni
     {
         var user = await _userManager.FindByIdAsync(request.UserId.ToString());
         if (user == null)
-            throw new NotFoundException(nameof(ApplicationUser), request.UserId);
+            throw new EntityNotFoundException(nameof(ApplicationUser), request.UserId);
 
         if (user.Email.Equals(request.NewEmail))
             return await Task.FromResult(Unit.Value);

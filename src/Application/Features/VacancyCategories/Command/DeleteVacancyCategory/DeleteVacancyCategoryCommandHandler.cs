@@ -15,7 +15,7 @@ public class DeleteVacancyCategoryCommandHandler : IRequestHandler<DeleteVacancy
     {
         var vacancyCategory = await _dbContext.Categories.FindAsync(new object[] { request.Id }, cancellationToken);
         if (vacancyCategory == null) 
-            throw new NotFoundException(nameof(VacancyCategory),request.Id);
+            throw new EntityNotFoundException(nameof(VacancyCategory),request.Id);
 
         _dbContext.Categories.Remove(vacancyCategory);
         await _dbContext.SaveChangesAsync(cancellationToken);

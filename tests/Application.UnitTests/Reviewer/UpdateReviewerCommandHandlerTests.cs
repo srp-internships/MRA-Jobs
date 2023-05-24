@@ -28,7 +28,7 @@ public class UpdateReviewerCommandHandlerTests : BaseTestFixture
 
         // Assert 
         act.Should()
-            .ThrowAsync<NotFoundException>()
+            .ThrowAsync<EntityNotFoundException>()
             .WithMessage($"*{nameof(Reviewer)}*{command.Id}*");
     }
 

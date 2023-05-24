@@ -5,7 +5,7 @@ using MRA.Jobs.Application.Contracts.Reviewer.Response;
 
 namespace MRA.Jobs.Application.Features.Reviewer.Query.GetReviewerWithPagination;
 
-public class GetReviewersPagedQueryHandler : IRequestHandler<PaggedListQuery<ReviewerListDto>, PaggedList<ReviewerListDto>>
+public class GetReviewersPagedQueryHandler : IRequestHandler<PaggedListQuery<ReviewerListItemResponce>, PaggedList<ReviewerListItemResponce>>
 {
     private readonly IApplicationDbContext _dbContext;
     private readonly IMapper _mapper;
@@ -18,9 +18,9 @@ public class GetReviewersPagedQueryHandler : IRequestHandler<PaggedListQuery<Rev
         _sieveProcessor = sieveProcessor;
     }
 
-    public async Task<PaggedList<ReviewerListDto>> Handle(PaggedListQuery<ReviewerListDto> request, CancellationToken cancellationToken)
+    public async Task<PaggedList<ReviewerListItemResponce>> Handle(PaggedListQuery<ReviewerListItemResponce> request, CancellationToken cancellationToken)
     {
-        var result = _sieveProcessor.ApplyAdnGetPaggedList(request, _dbContext.Reviewers.AsNoTracking(), _mapper.Map<ReviewerListDto>);
+        var result = _sieveProcessor.ApplyAdnGetPaggedList(request, _dbContext.Reviewers.AsNoTracking(), _mapper.Map<ReviewerListItemResponce>);
         return await Task.FromResult(result);
     }
 }

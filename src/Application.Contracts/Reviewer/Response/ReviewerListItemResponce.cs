@@ -1,6 +1,6 @@
 ﻿namespace MRA.Jobs.Application.Contracts.Reviewer.Response;
 
-public class ReviewerListDto
+public class ReviewerListItemResponce
 {
     public Guid Id { get; set; }
     public string Avatar { get; set; }

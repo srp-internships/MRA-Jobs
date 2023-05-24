@@ -12,7 +12,7 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
         context.ExceptionHandled = context switch
         {
             { Exception: ValidationException } => HandleValidationException(context),
-            { Exception: NotFoundException } => HandleNotFoundException(context),
+            { Exception: EntityNotFoundException } => HandleNotFoundException(context),
             { Exception: UnauthorizedAccessException } => HandleUnauthorizedAccessException(context),
             { Exception: ForbiddenAccessException } => HandleForbiddenAccessException(context),
             { Exception: TaskCanceledException } => HandleTaskCanceledException(context),
@@ -91,7 +91,7 @@ public class ApiExceptionFilterAttribute : ExceptionFilterAttribute
 
     private bool HandleNotFoundException(ExceptionContext context)
     {
-        var exception = (NotFoundException)context.Exception;
+        var exception = (EntityNotFoundException)context.Exception;
 
         var details = new ProblemDetails()
         {

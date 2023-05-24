@@ -19,7 +19,7 @@ public class CreateTrainingVacancyCommandHandler : IRequestHandler<CreateTrainin
     public async Task<Guid> Handle(CreateTrainingVacancyCommand request, CancellationToken cancellationToken)
     {
         var category = await _context.Categories.FindAsync(request.CategoryId);
-        _ = category ?? throw new NotFoundException(nameof(VacancyCategory), request.CategoryId);
+        _ = category ?? throw new EntityNotFoundException(nameof(VacancyCategory), request.CategoryId);
 
         var traningModel = _mapper.Map<TrainingVacancy>(request);
         traningModel.Category = category;

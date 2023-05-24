@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MRA.Jobs.Application.Contracts.Common;
 using MRA.Jobs.Application.Contracts.Reviewer.Command;
 using MRA.Jobs.Application.Contracts.Reviewer.Queries;
+using MRA.Jobs.Application.Contracts.Reviewer.Response;
 
 namespace MRA.Jobs.Web.Controllers;
 
@@ -9,7 +11,7 @@ public class ReviewersController : ApiControllerBase
     [HttpGet]
     public async Task<IActionResult> GetAllReviewer()
     {
-        var reviewers = await Mediator.Send(new GetAllReviewerQuery());
+        var reviewers = await Mediator.Send(new PaggedListQuery<ReviewerListItemResponce>());
         return Ok(reviewers);
     }
 

@@ -16,7 +16,7 @@ public class ChangePasswordCommandHandler : IRequestHandler<ChangePasswordComman
     {
         var user = await _userManager.FindByIdAsync(request.Id.ToString());
         if (user == null)
-            throw new NotFoundException(nameof(ApplicationUser), request.Id);
+            throw new EntityNotFoundException(nameof(ApplicationUser), request.Id);
 
         var result = await _userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
         if (!result.Succeeded)

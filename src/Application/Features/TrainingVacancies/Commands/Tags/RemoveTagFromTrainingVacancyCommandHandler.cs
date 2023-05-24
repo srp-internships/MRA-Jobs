@@ -24,7 +24,7 @@ public class RemoveTagFromTrainingVacancyCommandHandler : IRequestHandler<Remove
          .FirstOrDefaultAsync(x => x.Id == request.VacancyId, cancellationToken);
 
         if (trainingVacancy == null)
-            throw new NotFoundException(nameof(trainingVacancy), request.VacancyId);
+            throw new EntityNotFoundException(nameof(trainingVacancy), request.VacancyId);
 
         foreach (var tagName in request.Tags)
         {

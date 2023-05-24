@@ -27,7 +27,7 @@ public class UpdateApplicationCommandHandlerTests : BaseTestFixture
 
 
         // Assert
-        act.Should().ThrowAsync<NotFoundException>()
+        act.Should().ThrowAsync<EntityNotFoundException>()
             .WithMessage($"*{nameof(Application)}*{command.Id}*");
     }
 
@@ -43,7 +43,7 @@ public class UpdateApplicationCommandHandlerTests : BaseTestFixture
         Func<Task> act = async () => await _handler.Handle(command, CancellationToken.None);
 
         // Assert
-        Assert.ThrowsAsync<NotFoundException>(() => _handler.Handle(command, CancellationToken.None));
+        Assert.ThrowsAsync<EntityNotFoundException>(() => _handler.Handle(command, CancellationToken.None));
     }
 
     [Test]
@@ -58,7 +58,7 @@ public class UpdateApplicationCommandHandlerTests : BaseTestFixture
         Func<Task> act = async () => await _handler.Handle(command, CancellationToken.None);
 
         // Assert
-        Assert.ThrowsAsync<NotFoundException>(() => _handler.Handle(command, CancellationToken.None));
+        Assert.ThrowsAsync<EntityNotFoundException>(() => _handler.Handle(command, CancellationToken.None));
     }
 
     [Test]

@@ -27,7 +27,7 @@ public class UpdateVacancyCategoryCommandHandlerTests : BaseTestFixture
 
 
         // Assert
-        act.Should().ThrowAsync<NotFoundException>()
+        act.Should().ThrowAsync<EntityNotFoundException>()
             .WithMessage($"*{nameof(VacancyCategory)}*{command.Id}*");
     }
 

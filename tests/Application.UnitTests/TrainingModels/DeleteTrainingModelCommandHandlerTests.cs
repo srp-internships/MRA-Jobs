@@ -43,7 +43,7 @@ public class DeleteTrainingModelCommandHandlerTests : BaseTestFixture
             .ReturnsAsync(null as TrainingVacancy);
 
         // Act + Assert
-        Assert.ThrowsAsync<NotFoundException>(() => _handler.Handle(command, default));
+        Assert.ThrowsAsync<EntityNotFoundException>(() => _handler.Handle(command, default));
         _dbContextMock.Verify(x => x.TrainingVacancies.Remove(It.IsAny<TrainingVacancy>()), Times.Never);
         _dbContextMock.Verify(x => x.SaveChangesAsync(default), Times.Never);
     }

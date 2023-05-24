@@ -25,7 +25,7 @@ public class RemoveTagFromInternshipVacancyCommandHandler : IRequestHandler<Remo
            .FirstOrDefaultAsync(x => x.Id == request.InternshipId, cancellationToken);
 
         if (internship == null)
-            throw new NotFoundException(nameof(internship), request.InternshipId);
+            throw new EntityNotFoundException(nameof(internship), request.InternshipId);
 
         foreach (var tagName in request.Tags)
         {

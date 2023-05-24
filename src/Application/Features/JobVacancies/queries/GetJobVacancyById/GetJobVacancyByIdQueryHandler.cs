@@ -17,7 +17,7 @@ public class GetJobVacancyByIdQueryHandler : IRequestHandler<GetJobVacancyByIdQu
     public async Task<JobVacancyDetailsDTO> Handle(GetJobVacancyByIdQuery request, CancellationToken cancellationToken)
     {
         var jobVacancy = await _dbContext.JobVacancies.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
-        _ = jobVacancy ?? throw new NotFoundException(nameof(JobVacancy), request.Id);
+        _ = jobVacancy ?? throw new EntityNotFoundException(nameof(JobVacancy), request.Id);
         return _mapper.Map<JobVacancyDetailsDTO>(jobVacancy);
     }
 }

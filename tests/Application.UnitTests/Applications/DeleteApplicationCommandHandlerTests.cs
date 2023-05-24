@@ -44,7 +44,7 @@ public class DeleteApplicationCommandHandlerTests : BaseTestFixture
             .ReturnsAsync(null as Application);
 
         // Act + Assert
-        Assert.ThrowsAsync<NotFoundException>(() => _handler.Handle(command, default));
+        Assert.ThrowsAsync<EntityNotFoundException>(() => _handler.Handle(command, default));
         _dbContextMock.Verify(x => x.Applications.Remove(It.IsAny<Application>()), Times.Never);
         _dbContextMock.Verify(x => x.SaveChangesAsync(default), Times.Never);
     }

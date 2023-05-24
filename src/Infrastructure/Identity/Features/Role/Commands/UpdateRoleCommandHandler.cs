@@ -26,7 +26,7 @@ public class UpdateRoleCommandHandler : IRequestHandler<UpdateRoleCommand, RoleR
     {
         var role = await _roleManager.FindByIdAsync(request.Id.ToString());
         if (role == null)
-            throw new NotFoundException(nameof(ApplicationRole), request.Id);
+            throw new EntityNotFoundException(nameof(ApplicationRole), request.Id);
 
         role.Name = request.Name;
         var result = await _roleManager.UpdateAsync(role);

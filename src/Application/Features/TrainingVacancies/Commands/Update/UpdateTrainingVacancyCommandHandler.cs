@@ -19,10 +19,10 @@ public class UpdateTrainingVacancyCommandHandler : IRequestHandler<UpdateTrainin
     public async Task<Guid> Handle(UpdateTrainingVacancyCommand request, CancellationToken cancellationToken)
     {
         var trainingVacancy = await _context.TrainingVacancies.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
-        _ = trainingVacancy ?? throw new NotFoundException(nameof(TrainingVacancy), request.Id);
+        _ = trainingVacancy ?? throw new EntityNotFoundException(nameof(TrainingVacancy), request.Id);
 
         var category = await _context.Categories.FindAsync(new object[] { request.CategoryId }, cancellationToken: cancellationToken);
-        _ = category ?? throw new NotFoundException(nameof(VacancyCategory), request.CategoryId);
+        _ = category ?? throw new EntityNotFoundException(nameof(VacancyCategory), request.CategoryId);
 
         _mapper.Map(request, trainingVacancy);
 

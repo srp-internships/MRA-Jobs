@@ -16,7 +16,7 @@ public class GetUserRolesQueryHandler : IRequestHandler<GetUserRolesQuery, IEnum
     {
         var user = await _userManager.FindByIdAsync(request.Id.ToString());
         if (user == null)
-            throw new NotFoundException(nameof(ApplicationUser), request.Id);
+            throw new EntityNotFoundException(nameof(ApplicationUser), request.Id);
 
         return await _userManager.GetRolesAsync(user);
     }

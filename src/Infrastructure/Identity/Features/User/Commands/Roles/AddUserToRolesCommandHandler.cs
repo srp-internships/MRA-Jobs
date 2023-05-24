@@ -18,7 +18,7 @@ public class AddUserToRolesCommandHandler : IRequestHandler<AddUserToRolesComman
     {
         var user = await _userManager.FindByIdAsync(request.Id.ToString());
         if (user == null)
-            throw new NotFoundException(nameof(ApplicationUser), request.Id);
+            throw new EntityNotFoundException(nameof(ApplicationUser), request.Id);
 
         var result = await _userManager.AddToRolesAsync(user, request.Roles);
         if (!result.Succeeded)

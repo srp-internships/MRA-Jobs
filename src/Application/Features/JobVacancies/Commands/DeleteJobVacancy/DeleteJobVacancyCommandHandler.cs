@@ -16,7 +16,7 @@ public class DeleteJobVacancyCommandHandler : IRequestHandler<DeleteJobVacancyCo
         var jobVacancy = await _dbContext.JobVacancies.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
 
         if (jobVacancy == null)
-            throw new NotFoundException(nameof(JobVacancy), request.Id);
+            throw new EntityNotFoundException(nameof(JobVacancy), request.Id);
 
         _dbContext.JobVacancies.Remove(jobVacancy);
         await _dbContext.SaveChangesAsync(cancellationToken);

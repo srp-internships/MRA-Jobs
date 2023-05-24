@@ -24,9 +24,9 @@ public class CreateApplicationCommandHandler : IRequestHandler<CreateApplication
     public async Task<Guid> Handle(CreateApplicationCommand request, CancellationToken cancellationToken)
     {
         var applicant = await _context.Applicants.FindAsync(request.ApplicantId);
-        _ = applicant ?? throw new NotFoundException(nameof(Applicant), request.ApplicantId);
+        _ = applicant ?? throw new EntityNotFoundException(nameof(Applicant), request.ApplicantId);
         var vacancy = await _context.Vacancies.FindAsync(request.VacancyId);
-        _ = vacancy ?? throw new NotFoundException(nameof(Vacancy), request.VacancyId);
+        _ = vacancy ?? throw new EntityNotFoundException(nameof(Vacancy), request.VacancyId);
 
         var application = _mapper.Map<Application>(request);
 

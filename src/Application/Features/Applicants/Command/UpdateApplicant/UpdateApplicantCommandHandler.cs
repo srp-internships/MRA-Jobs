@@ -18,7 +18,7 @@ public class UpdateApplicantCommandHandler : IRequestHandler<UpdateApplicantComm
     {
         var applicant =
             await _context.Applicants.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
-        _ = applicant ?? throw new NotFoundException(nameof(Applicant), request.Id);
+        _ = applicant ?? throw new EntityNotFoundException(nameof(Applicant), request.Id);
 
         _mapper.Map(request, applicant);
 

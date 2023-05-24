@@ -25,7 +25,7 @@ public class DeleteRoleCommandHandler : IRequestHandler<DeleteRoleCommand, Unit>
     {
         var role = await _roleManager.FindByIdAsync(request.Id.ToString());
         if (role == null)
-            throw new NotFoundException(nameof(ApplicationRole), request.Id);
+            throw new EntityNotFoundException(nameof(ApplicationRole), request.Id);
 
         var result = await _roleManager.DeleteAsync(role);
         if (!result.Succeeded)

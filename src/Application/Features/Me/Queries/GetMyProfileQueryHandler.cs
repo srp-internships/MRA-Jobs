@@ -28,7 +28,7 @@ public class GetMyProfileQueryHandler : IRequestHandler<GetMyProfileQuery, MyPro
 
         var domainUser = await _applicationDbContext.DomainUsers.FindAsync(new object[] { userId }, cancellationToken);
         if (domainUser is null)
-            throw new NotFoundException(nameof(User), userId);
+            throw new EntityNotFoundException(nameof(User), userId);
 
         var identityProfile = await _identityService.GetUserIdentityAsync(userId.Value, cancellationToken);
 

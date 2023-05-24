@@ -44,7 +44,7 @@ public class DeleteReviewerCommandHandlerTests : BaseTestFixture
             .ReturnsAsync(null as Reviewer);
         
         // Act + Assert
-        Assert.ThrowsAsync<NotFoundException>(() => _handler.Handle(command, default));
+        Assert.ThrowsAsync<EntityNotFoundException>(() => _handler.Handle(command, default));
         _dbContextMock.Verify(i => i.Reviewers.Remove(It.IsAny<Reviewer>()), Times.Never);
         _dbContextMock.Verify(i => i.SaveChangesAsync(default), Times.Never);
     }

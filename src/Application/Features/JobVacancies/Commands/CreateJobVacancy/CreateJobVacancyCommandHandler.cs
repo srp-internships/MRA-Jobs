@@ -21,7 +21,7 @@ public class CreateJobVacancyCommandHandler : IRequestHandler<CreateJobVacancyCo
     public async Task<Guid> Handle(CreateJobVacancyCommand request, CancellationToken cancellationToken)
     {
         var category = await _dbContext.Categories.FindAsync(request.CategoryId);
-        _ = category ?? throw new NotFoundException(nameof(VacancyCategory), request.CategoryId);
+        _ = category ?? throw new EntityNotFoundException(nameof(VacancyCategory), request.CategoryId);
 
         var jobVacancy = _mapper.Map<JobVacancy>(request);
         jobVacancy.Category = category;

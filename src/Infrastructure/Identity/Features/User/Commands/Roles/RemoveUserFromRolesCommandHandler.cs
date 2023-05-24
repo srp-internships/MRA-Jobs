@@ -16,7 +16,7 @@ public class RemoveUserFromRolesCommandHandler : IRequestHandler<RemoveUserFromR
     {
         var user = await _userManager.FindByIdAsync(request.Id.ToString());
         if (user == null)
-            throw new NotFoundException(nameof(ApplicationUser), request.Id);
+            throw new EntityNotFoundException(nameof(ApplicationUser), request.Id);
 
         var result = await _userManager.RemoveFromRolesAsync(user, request.Roles);
         if (!result.Succeeded)

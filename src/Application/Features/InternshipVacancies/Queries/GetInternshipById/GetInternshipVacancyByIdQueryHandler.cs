@@ -15,7 +15,7 @@ public class GetInternshipVacancyByIdQueryHandler : IRequestHandler<GetInternshi
     public async Task<InternshipVacancyResponce> Handle(GetInternshipVacancyByIdQuery request, CancellationToken cancellationToken)
     {
         var internship = await _context.Internships.FindAsync(new object[] { request.Id }, cancellationToken);
-        _ = internship ?? throw new NotFoundException(nameof(InternshipVacancy), request.Id);
+        _ = internship ?? throw new EntityNotFoundException(nameof(InternshipVacancy), request.Id);
         return _mapper.Map<InternshipVacancyResponce>(internship);
     }
 }

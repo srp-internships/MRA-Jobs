@@ -3,7 +3,7 @@ using MRA.Jobs.Infrastructure.Shared.Users.Queries;
 
 namespace MRA.Jobs.Infrastructure.Identity.Features.User.Queries;
 
-public class EmailExistQueryHandler : IRequestHandler<EmailExistQuery, bool>
+public class EmailExistQueryHandler : IRequestHandler<EmailExistQuery, Unit>
 {
     private readonly UserManager<ApplicationUser> _userManager;
 
@@ -12,9 +12,13 @@ public class EmailExistQueryHandler : IRequestHandler<EmailExistQuery, bool>
         _userManager = userManager;
     }
 
-    public async Task<bool> Handle(EmailExistQuery request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(EmailExistQuery request, CancellationToken cancellationToken)
     {
         var user = await _userManager.FindByEmailAsync(request.Email);
-        return user is not null;
+        if (user == null)
+        {
+            throw new EntityNotFoundException("", request.Email);
+        }
+        return await Unit.Task;
     }
 }

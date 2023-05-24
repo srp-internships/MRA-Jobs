@@ -14,7 +14,7 @@ public class DeleteTrainingVacancyCommandHadler : IRequestHandler<DeleteTraining
         var traningModel = await _context.TrainingVacancies.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
 
         if (traningModel == null)
-            throw new NotFoundException(nameof(TrainingVacancy), request.Id);
+            throw new EntityNotFoundException(nameof(TrainingVacancy), request.Id);
 
         _context.TrainingVacancies.Remove(traningModel);
         await _context.SaveChangesAsync(cancellationToken);

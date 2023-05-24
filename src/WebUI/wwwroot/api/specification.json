@@ -249,7 +249,7 @@
         ]
       }
     },
-    "/api/accounts/me/identity/change-password": {
+    "/api/accounts/me/change-password": {
       "put": {
         "tags": [
           "Accounts"
@@ -287,7 +287,7 @@
         ]
       }
     },
-    "/api/accounts/me/identity/verify/phone/send": {
+    "/api/accounts/me/verify/phone/send": {
       "get": {
         "tags": [
           "Accounts"
@@ -324,7 +324,7 @@
         ]
       }
     },
-    "/api/accounts/me/identity/verify/phone": {
+    "/api/accounts/me/verify/phone": {
       "get": {
         "tags": [
           "Accounts"
@@ -370,7 +370,7 @@
         ]
       }
     },
-    "/api/accounts/me/identity/verify/email/sent": {
+    "/api/accounts/me/verify/email/send": {
       "get": {
         "tags": [
           "Accounts"
@@ -407,7 +407,7 @@
         ]
       }
     },
-    "/api/accounts/me/identity/verify/email": {
+    "/api/accounts/me/verify/email": {
       "get": {
         "tags": [
           "Accounts"
@@ -431,13 +431,105 @@
               "nullable": true
             },
             "x-position": 2
-          },
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
           {
-            "name": "userId",
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/accounts/verify/phone/send": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_SendPhoneVerificationCode",
+        "parameters": [
+          {
+            "name": "UserId",
             "in": "query",
             "schema": {
               "type": "string",
               "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "NewPhoneNumber",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "JWT": []
+          }
+        ]
+      }
+    },
+    "/api/accounts/verify/phone": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "operationId": "Accounts_VerifyPhone",
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "NewPhoneNumber",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "Code",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
             },
             "x-position": 3
           }
@@ -462,90 +554,7 @@
         ]
       }
     },
-    "/api/accounts/identity/verify/phone/send": {
-      "get": {
-        "tags": [
-          "Accounts"
-        ],
-        "operationId": "Accounts_SendPhoneVerificationCode",
-        "parameters": [
-          {
-            "name": "phone",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 1
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      }
-    },
-    "/api/accounts/identity/verify/phone": {
-      "get": {
-        "tags": [
-          "Accounts"
-        ],
-        "operationId": "Accounts_VerifyPhone",
-        "parameters": [
-          {
-            "name": "phone",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 1
-          },
-          {
-            "name": "code",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 2
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "binary"
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "JWT": []
-          }
-        ]
-      }
-    },
-    "/api/accounts/identity/email/exist": {
+    "/api/accounts/verify/email/exist": {
       "get": {
         "tags": [
           "Accounts"
@@ -581,7 +590,7 @@
         ]
       }
     },
-    "/api/accounts/identity/verify/email/sent": {
+    "/api/accounts/verify/email/send": {
       "get": {
         "tags": [
           "Accounts"
@@ -589,13 +598,22 @@
         "operationId": "Accounts_SendEmailVerificationToken",
         "parameters": [
           {
-            "name": "newEmail",
+            "name": "UserId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
+          },
+          {
+            "name": "NewEmail",
             "in": "query",
             "schema": {
               "type": "string",
               "nullable": true
             },
-            "x-position": 1
+            "x-position": 2
           }
         ],
         "responses": {
@@ -618,24 +636,41 @@
         ]
       }
     },
-    "/api/accounts/identity/verify/email": {
-      "put": {
+    "/api/accounts/verify/email": {
+      "get": {
         "tags": [
           "Accounts"
         ],
         "operationId": "Accounts_VerifyEmail",
-        "requestBody": {
-          "x-name": "command",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/UpdateMyProfileCommand"
-              }
-            }
+        "parameters": [
+          {
+            "name": "UserId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "guid"
+            },
+            "x-position": 1
           },
-          "required": true,
-          "x-position": 1
-        },
+          {
+            "name": "NewEmail",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 2
+          },
+          {
+            "name": "Token",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            },
+            "x-position": 3
+          }
+        ],
         "responses": {
           "200": {
             "description": "",

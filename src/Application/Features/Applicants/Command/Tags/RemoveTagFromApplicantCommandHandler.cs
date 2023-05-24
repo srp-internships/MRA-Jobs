@@ -25,7 +25,7 @@ public class RemoveTagsFromApplicantCommandHandler : IRequestHandler<RemoveTagsF
             .FirstOrDefaultAsync(x => x.Id == request.ApplicantId, cancellationToken);
 
         if (applicant == null)
-            throw new NotFoundException(nameof(Applicant), request.ApplicantId);
+            throw new EntityNotFoundException(nameof(Applicant), request.ApplicantId);
 
         foreach (var tag in request.Tags)
         {

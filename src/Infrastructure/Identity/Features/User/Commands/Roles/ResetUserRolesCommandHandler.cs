@@ -16,7 +16,7 @@ public class ResetUserRolesCommandHandler : IRequestHandler<ResetUserRolesComman
     {
         var user = await _userManager.FindByIdAsync(request.Id.ToString());
         if (user == null)
-            throw new NotFoundException(nameof(ApplicationUser), request.Id);
+            throw new EntityNotFoundException(nameof(ApplicationUser), request.Id);
 
         var existRoles = await _userManager.GetRolesAsync(user);
         var existRolesToRemove = existRoles.Where(r => !request.Roles.Contains(r));

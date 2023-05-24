@@ -16,7 +16,7 @@ public class DeleteApplicantCommandHandler : IRequestHandler<DeleteApplicantComm
         var applicant = await _context.Applicants.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
 
         if (applicant == null)
-            throw new NotFoundException(nameof(Applicant), request.Id);
+            throw new EntityNotFoundException(nameof(Applicant), request.Id);
 
         _context.Applicants.Remove(applicant);
         await _context.SaveChangesAsync(cancellationToken);

@@ -101,7 +101,7 @@ public class CreateInternshipCommandHandlerTests : BaseTestFixture
         Func<Task> act = async () => await _handler.Handle(request, CancellationToken.None);
 
         // Assert
-        act.Should().ThrowAsync<NotFoundException>()
+        act.Should().ThrowAsync<EntityNotFoundException>()
          .WithMessage($"*{nameof(VacancyCategory)}*{request.CategoryId}*");
     }
 }

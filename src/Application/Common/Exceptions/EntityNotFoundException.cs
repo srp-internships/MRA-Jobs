@@ -22,7 +22,7 @@ public class EntityNotFoundException : Exception
     {
     }
 }
-public class NotFoundException : Exception
+public class NotsFoundException : Exception
 {
     public NotFoundException()
         : base()
@@ -44,3 +44,4 @@ public class NotFoundException : Exception
     {
     }
 }
+

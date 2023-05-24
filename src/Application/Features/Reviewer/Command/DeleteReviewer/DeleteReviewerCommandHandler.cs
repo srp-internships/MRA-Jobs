@@ -19,7 +19,7 @@ public class DeleteReviewerCommandHandler : IRequestHandler<DeleteReviewerComman
             await _context.Reviewers.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
        
         if (reviewer == null)
-            throw new NotFoundException(nameof(Reviewer), request.Id);
+            throw new EntityNotFoundException(nameof(Reviewer), request.Id);
         
         _context.Reviewers.Remove(reviewer);
         await _context.SaveChangesAsync(cancellationToken);

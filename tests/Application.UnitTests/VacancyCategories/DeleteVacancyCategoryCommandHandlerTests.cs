@@ -46,7 +46,7 @@ public class DeleteVacancyCategoryCommandHandlerTests : BaseTestFixture
             .ReturnsAsync(null as VacancyCategory);
 
         // Act + Assert
-        Assert.ThrowsAsync<NotFoundException>(() => _handler.Handle(command, default));
+        Assert.ThrowsAsync<EntityNotFoundException>(() => _handler.Handle(command, default));
         _dbContextMock.Verify(x => x.Categories.Remove(It.IsAny<VacancyCategory>()), Times.Never);
         _dbContextMock.Verify(x => x.SaveChangesAsync(default), Times.Never);
     }

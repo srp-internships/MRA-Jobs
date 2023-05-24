@@ -55,7 +55,7 @@ public class GetReviewerByIdQueryHandlerTests  : BaseTestFixture
             .ReturnsAsync((Reviewer)null);
         
         // Act + Assert 
-        Assert.ThrowsAsync<NotFoundException>(() => _handler.Handle(query, CancellationToken.None));
+        Assert.ThrowsAsync<EntityNotFoundException>(() => _handler.Handle(query, CancellationToken.None));
     }
 
 }

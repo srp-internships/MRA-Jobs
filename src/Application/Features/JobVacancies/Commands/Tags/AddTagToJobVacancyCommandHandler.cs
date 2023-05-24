@@ -29,7 +29,7 @@ public class AddTagToJobVacancyCommandHandler : IRequestHandler<AddTagsToJobVaca
           .FirstOrDefaultAsync(x => x.Id == request.JobVacancyId, cancellationToken);
 
         if (jobVacancy == null)
-            throw new NotFoundException(nameof(JobVacancy), request.JobVacancyId);
+            throw new EntityNotFoundException(nameof(JobVacancy), request.JobVacancyId);
 
         foreach (var tagName in request.Tags)
         {

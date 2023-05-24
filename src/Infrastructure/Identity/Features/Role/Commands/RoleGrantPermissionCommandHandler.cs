@@ -26,7 +26,7 @@ public class RoleGrantPermissionCommandHandler : IRequestHandler<RoleGrantPermis
         var role = await _context.Roles.FindAsync(request.Id);
         if (role == null)
         {
-            throw new NotFoundException(nameof(ApplicationRole), request.Id);
+            throw new EntityNotFoundException(nameof(ApplicationRole), request.Id);
         }
 
         foreach (var permissionId in request.Permissions)

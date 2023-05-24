@@ -18,7 +18,7 @@ public class UpdateReviewerCommandHandler : IRequestHandler<UpdateReviewerComman
     {
         var reviewer =
             await _context.Reviewers.FindAsync(new object[] { request.Id }, cancellationToken: cancellationToken);
-        _ = reviewer ?? throw new NotFoundException(nameof(Reviewer), request);
+        _ = reviewer ?? throw new EntityNotFoundException(nameof(Reviewer), request);
 
         _mapper.Map(request, reviewer);
         
