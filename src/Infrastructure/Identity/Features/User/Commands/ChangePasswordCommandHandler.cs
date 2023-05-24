@@ -1,22 +1,25 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using MRA.Jobs.Infrastructure.Shared.Users.Commands;
+using MRA.Jobs.Infrastructure.Shared.Me.Commands;
 
 namespace MRA.Jobs.Infrastructure.Identity.Features.User.Commands;
 
-public class ChangePasswordCommandHandler : IRequestHandler<ChangePasswordCommand, Unit>
+public class ChangePasswordCommandHandler : IRequestHandler<ChangeMyPasswordCommand, Unit>
 {
     private readonly UserManager<ApplicationUser> _userManager;
+    private readonly ICurrentUserService _currentUserService;
 
-    public ChangePasswordCommandHandler(UserManager<ApplicationUser> userManager)
+    public ChangePasswordCommandHandler(UserManager<ApplicationUser> userManager, ICurrentUserService currentUserService)
     {
         _userManager = userManager;
+        _currentUserService = currentUserService;
     }
 
-    public async Task<Unit> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
+    public async Task<Unit> Handle(ChangeMyPasswordCommand request, CancellationToken cancellationToken)
     {
-        var user = await _userManager.FindByIdAsync(request.Id.ToString());
+        var userId = _currentUserService.GetId() ?? Guid.Empty;
+        var user = await _userManager.FindByIdAsync(userId.ToString());
         if (user == null)
-            throw new EntityNotFoundException(nameof(ApplicationUser), request.Id);
+            throw new EntityNotFoundException(nameof(ApplicationUser), userId);
 
         var result = await _userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
         if (!result.Succeeded)

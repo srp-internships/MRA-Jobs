@@ -1,36 +1,26 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using MRA.Jobs.Infrastructure.Shared.Auth.Commands;
+﻿using MRA.Jobs.Infrastructure.Shared.Auth.Commands;
 using MRA.Jobs.Infrastructure.Shared.Auth.Responses;
-using MRA.Jobs.Web.Controllers;
 
 namespace MRA.Jobs.Web.IdentityControllers;
 
-[ApiController]
-public class AuthController : ApiControllerBase
+public class AuthController : AuthApiControllerBase
 {
-    private readonly IMediator _mediator;
-
-    public AuthController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
+    [AllowAnonymous]
     [HttpPost("login")]
     public async Task<ActionResult<JwtTokenResponse>> Login([FromBody] BasicAuthenticationCommand command, CancellationToken cancellationToken = default)
     {
-        return Ok(await _mediator.Send(command, cancellationToken));
+        return Ok(await Mediator.Send(command, cancellationToken));
     }
 
-    [HttpPut("refresh-token")]
-    public async Task<ActionResult<JwtTokenResponse>> RefreshToken([FromBody] RefreshTokenCommand command, CancellationToken cancellationToken = default)
+    [HttpGet("token/refresh")]
+    public async Task<ActionResult<JwtTokenResponse>> RefreshToken([FromQuery] RefreshTokenCommand command, CancellationToken cancellationToken = default)
     {
-        return Ok(await _mediator.Send(command, cancellationToken));
+        return Ok(await Mediator.Send(command, cancellationToken));
     }
 
-    [HttpDelete("revoke-refresh-token")]
-    public async Task<ActionResult<JwtTokenResponse>> RevokeRefreshToken([FromBody] RevokeRefreshTokenCommand command, CancellationToken cancellationToken = default)
+    [HttpGet("token/token")]
+    public async Task<ActionResult<JwtTokenResponse>> RevokeRefreshToken([FromQuery] RevokeRefreshTokenCommand command, CancellationToken cancellationToken = default)
     {
-        return Ok(await _mediator.Send(command, cancellationToken));
+        return Ok(await Mediator.Send(command, cancellationToken));
     }
 }

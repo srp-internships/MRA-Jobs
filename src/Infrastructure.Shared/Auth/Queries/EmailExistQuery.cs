@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace MRA.Jobs.Infrastructure.Shared.Users.Queries;
+namespace MRA.Jobs.Infrastructure.Shared.Auth.Queries;
 
 public class EmailExistQuery : IRequest
 {

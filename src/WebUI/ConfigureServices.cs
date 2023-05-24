@@ -7,6 +7,7 @@ using NSwag.Generation.Processors.Security;
 using MRA.Jobs.Web.Services;
 using MRA.Jobs.Web.Filters;
 using System.Text.Json.Serialization;
+using HashidsNet;
 
 namespace MRA.Jobs.Web;
 
@@ -15,7 +16,6 @@ public static class ConfigureServices
     public static IServiceCollection AddWebUIServices(this IServiceCollection services)
     {
         services.AddDatabaseDeveloperPageExceptionFilter();
-
         services.AddScoped<IFileService, FileService>();
 
         services.AddHttpContextAccessor();

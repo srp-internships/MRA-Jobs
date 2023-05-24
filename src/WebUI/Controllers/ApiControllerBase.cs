@@ -1,10 +1,10 @@
 ﻿using MediatR;
 
-using Microsoft.AspNetCore.Mvc;
-
 namespace MRA.Jobs.Web.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public abstract class ApiControllerBase : ControllerBase
 {

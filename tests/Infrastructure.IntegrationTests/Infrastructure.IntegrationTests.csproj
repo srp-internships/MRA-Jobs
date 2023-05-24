@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Infrastructure\MRA.Jobs.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\MRA.Jobs.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

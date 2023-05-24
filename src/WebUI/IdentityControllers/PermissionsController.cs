@@ -6,20 +6,11 @@ using MRA.Jobs.Web.Controllers;
 
 namespace MRA.Jobs.Web.IdentityControllers;
 
-[ApiController]
-[Route("api/[controller]")]
-public class PermissionsController : ApiControllerBase
+public class PermissionsController : AuthApiControllerBase
 {
-    private readonly IMediator _mediator;
-
-    public PermissionsController(IMediator mediator)
-    {
-        _mediator = mediator;
-    }
-
     [HttpGet]
     public async Task<ActionResult<PaggedList<PermissionResponse>>> Get([FromQuery] PaggedListQuery<PermissionResponse> request)
     {
-        return Ok(await _mediator.Send(request));
+        return Ok(await Mediator.Send(request));
     }
 }

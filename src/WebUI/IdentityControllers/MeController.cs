@@ -1,47 +1,40 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MRA.Jobs.Application.Common.Security;
+﻿using MRA.Jobs.Application.Contracts.MyProfile.Commands;
 using MRA.Jobs.Application.Contracts.MyProfile.Queries;
-using MRA.Jobs.Infrastructure.Shared.Users.Commands;
+using MRA.Jobs.Application.Contracts.MyProfile.Responses;
+using MRA.Jobs.Infrastructure.Shared.Me.Commands;
 using MRA.Jobs.Infrastructure.Shared.Users.Commands.Verifications;
-using MRA.Jobs.Web.Controllers;
 
 namespace MRA.Jobs.Web.IdentityControllers;
 
-using Microsoft.AspNetCore.Authorization
-    ;
-using MRA.Jobs.Application.Contracts.MyProfile.Commands;
-using MRA.Jobs.Application.Contracts.MyProfile.Responses;
 
-[Authorize]
-[Route("api/me")]
-public class CurrentUserController : ApiControllerBase
+public class MeController : AuthApiControllerBase
 {
     private readonly ICurrentUserService _currentUserService;
 
-    public CurrentUserController(ICurrentUserService currentUserService)
+    public MeController(ICurrentUserService currentUserService)
     {
         _currentUserService = currentUserService;
     }
 
-    [HttpGet("me")]
+    [HttpGet]
     public async Task<ActionResult<MyProfileResponse>> MyProfile()
     {
         return Ok(await Mediator.Send(new GetMyProfileQuery()));
     }
 
-    [HttpPut("me")]
+    [HttpPut]
     public async Task<ActionResult<MyProfileResponse>> UpdateMyProfile(UpdateMyProfileCommand command)
     {
         return Ok(await Mediator.Send(command));
     }
 
-    [HttpPut("me/change-password")]
-    public async Task<IActionResult> ChangeMyPassword(ChangePasswordCommand command)
+    [HttpPut("identity/change-password")]
+    public async Task<IActionResult> ChangeMyPassword(ChangeMyPasswordCommand command)
     {
         return Ok(await Mediator.Send(command));
     }
 
-    [HttpGet("me/verify/phone/send")]
+    [HttpGet("identity/verify/phone/send")]
     public async Task<IActionResult> SendVerificationCodeForMyPhone([FromQuery] string phone)
     {
         return Ok(await Mediator.Send(new ChangePhoneNumberCommand()
@@ -51,7 +44,7 @@ public class CurrentUserController : ApiControllerBase
         }));
     }
 
-    [HttpGet("me/verify/phone")]
+    [HttpGet("identity/verify/phone")]
     public async Task<IActionResult> VerifyMyPhone([FromQuery] string phone, [FromQuery] string code)
     {
         return Ok(await Mediator.Send(new ConfirmPhoneNumberChangeCommand()
@@ -62,7 +55,7 @@ public class CurrentUserController : ApiControllerBase
         }));
     }
 
-    [HttpGet("me/verify/email/send")]
+    [HttpGet("identity/verify/email/send")]
     public async Task<IActionResult> SendVerificationTokenForMyEmail([FromQuery] string newEmail)
     {
         return Ok(await Mediator.Send(new ChangeEmailCommand()
@@ -72,7 +65,7 @@ public class CurrentUserController : ApiControllerBase
         }));
     }
 
-    [HttpGet("me/verify/email")]
+    [HttpGet("identity/verify/email")]
     public async Task<IActionResult> VerifyMyEmail([FromQuery] string token, [FromQuery] string newEmail)
     {
         return Ok(await Mediator.Send(new ConfirmEmailChangeCommand()

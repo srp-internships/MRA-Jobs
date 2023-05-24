@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using MRA.Jobs.Infrastructure.Shared.Users.Queries;
+using MRA.Jobs.Application.Common.Exceptions;
+using MRA.Jobs.Infrastructure.Identity.Entities;
+using MRA.Jobs.Infrastructure.Shared.Auth.Queries;
 
 namespace MRA.Jobs.Infrastructure.Identity.Features.User.Queries;
 

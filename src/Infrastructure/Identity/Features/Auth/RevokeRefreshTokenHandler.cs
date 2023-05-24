@@ -7,7 +7,7 @@ public class RevokeRefreshTokenCommandValidator : AbstractValidator<RevokeRefres
 {
     public RevokeRefreshTokenCommandValidator()
     {
-        RuleFor(x => x.Token).NotNull().NotEmpty();
+        RuleFor(x => x.RefreshToken).NotNull().NotEmpty();
     }
 }
 
@@ -22,7 +22,7 @@ public class RevokeRefreshTokenHandler : IRequestHandler<RevokeRefreshTokenComma
 
     public async Task<Unit> Handle(RevokeRefreshTokenCommand request, CancellationToken cancellationToken)
     {
-        await _tokenService.RevokeRefreshToken(request.Token);
+        await _tokenService.RevokeRefreshToken(request.RefreshToken);
 
         return await Unit.Task;
     }

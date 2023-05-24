@@ -8,7 +8,7 @@ public class RefreshTokenCommandValidator : AbstractValidator<RefreshTokenComman
 {
     public RefreshTokenCommandValidator()
     {
-        RuleFor(x => x.Token).NotNull().NotEmpty();
+        RuleFor(x => x.RefreshToken).NotNull().NotEmpty();
     }
 }
 
@@ -23,6 +23,6 @@ public class RefreshTokenHandler : IRequestHandler<RefreshTokenCommand, JwtToken
 
     public async Task<JwtTokenResponse> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
     {
-        return await _tokenService.RefreshToken(request.Token);
+        return await _tokenService.RefreshToken(request.RefreshToken);
     }
 }

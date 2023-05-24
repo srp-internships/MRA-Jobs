@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Me\Queries\" />
+    <Folder Include="Me\Responses\" />
+    <Folder Include="Users\Responses\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Application.Contracts\MRA.Jobs.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
